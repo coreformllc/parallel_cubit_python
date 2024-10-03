@@ -37,3 +37,14 @@ mkdir path\to\workdir\nuclear
 cd path\to\workdir\nuclear
 python.exe path\to\nuclear_example.py --num-proc 8
 ```
+
+When these execute they do the following:
+
+1. Create a base model, either via CAD generation or importing a CAD file.
+    * Saves this base model as `base_model.cub5` in the working directory
+2. Distributes bodies in `num_proc` lists of approximately quantity of bodies
+    * Exports a temporary file for each of the `num_proc` lists to `./tmp/proc_{p}.cub5` -- where `{p}` is an integer for the worker id.
+3. Uses the [`multiprocessing`](https://docs.python.org/3.11/library/multiprocessing.html) library to map each temporary file to a worker within a `Pool`.
+    * Each worker meshes its temporary file and saves the temporary file, overwriting it.
+4. After completion, the main process creates a new Cubit file and imports each of the meshed temporary files.
+    * Saves this meshed model as `base_model_meshed.cub5`
