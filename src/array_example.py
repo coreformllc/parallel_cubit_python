@@ -9,8 +9,6 @@ import coreform_utils
 cubit = coreform_utils.import_cubit()
 num_physical_cores = coreform_utils.get_physical_cores()
 
-top_wd = os.getcwd()
-
 parser = argparse.ArgumentParser()
 def input_args():
     parser.add_argument( "--num-proc", "-np", dest="num_proc", type=int, default=num_physical_cores )
