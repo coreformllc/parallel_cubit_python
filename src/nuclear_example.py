@@ -57,7 +57,7 @@ def mesh_entities( filename ):
     cubit.cmd( "reset" )
     cubit.cmd( f'open "{filename}"' )
     cubit.cmd( "compress ids" )
-    cubit.cmd( "set trimesher coarse on ratio 100 angle 5" )
+    cubit.cmd( "set trimesher coarse on ratio 100 angle 0.5" )
     cubit.cmd( "surface all  scheme trimesh" )
     cubit.cmd( "mesh surface all " )
     cubit.cmd( f"save cub5 '{filename}' overwrite" )
